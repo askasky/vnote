@@ -244,11 +244,11 @@ QString SnippetMgr::applySnippetBySymbol(const QString &p_content,
 {
     QString content(p_content);
 
-    int maxTimes = 100;
+    int maxTimesAtSamePos = 100;
 
     QRegularExpression regExp(c_snippetSymbolRegExp);
     int pos = 0;
-    while (pos < content.size() && maxTimes-- > 0) {
+    while (pos < content.size()) {
         QRegularExpressionMatch match;
         int idx = content.indexOf(regExp, pos, &match);
         if (idx == -1) {
@@ -288,6 +288,13 @@ QString SnippetMgr::applySnippetBySymbol(const QString &p_content,
         }
 
         // @afterText may still contains snippet symbol.
+        if (pos == idx) {
+            if (--maxTimesAtSamePos == 0) {
+                break;
+            }
+        } else {
+            maxTimesAtSamePos = 100;
+        }
         pos = idx;
     }
 

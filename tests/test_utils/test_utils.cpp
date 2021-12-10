@@ -10,6 +10,11 @@ using namespace tests;
 
 using namespace vnotex;
 
+TestUtils::TestUtils(QObject *p_parent)
+    : QObject(p_parent)
+{
+}
+
 void TestUtils::testParentDirPath_data()
 {
     QTest::addColumn<QString>("path");

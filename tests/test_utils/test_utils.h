@@ -8,6 +8,8 @@ namespace tests
     class TestUtils : public QObject
     {
         Q_OBJECT
+    public:
+        explicit TestUtils(QObject *p_parent = nullptr);
 
     private slots:
         // Define test cases here per slot.
